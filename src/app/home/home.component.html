@@ -1,0 +1,9 @@
+
+<app-converter-panel [baseCurrency]="'EUR'" [targetCurrency]="'USD'" [isHome]="true" (onConvert)="getConvertedValue($event)">
+</app-converter-panel>
+
+<div class="container">
+  <div class="control" *ngFor="let currency of convertedCurrencies">
+    {{currency.amount?.toLocaleString(undefined, { maximumFractionDigits: 2 }) || 'XX.XX'}} {{currency.currency}}
+  </div>
+</div>

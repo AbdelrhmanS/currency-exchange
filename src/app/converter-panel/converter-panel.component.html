@@ -1,0 +1,41 @@
+<div class="container" [formGroup]="converterForm" *ngIf="converterForm">
+  <div class="control">
+    <label>
+      Amount
+      <input type="number" formControlName="amount" />
+    </label>
+  </div>
+  <div class="control">
+    <label>
+      From
+      <ng-select formControlName="base" [clearable]="false" [items]="currencies" (change)="getConversionRate()"></ng-select>
+    </label>
+  </div>
+  <button (click)="swapCurrencies()" class="swap-btn" [disabled]="!converterForm.get('base')?.value || !converterForm.get('to')?.value">Swap</button>
+  <div class="control">
+    <label>
+      to
+      <ng-select formControlName="to" [clearable]="false" [items]="currencies" (change)="getConversionRate()"></ng-select>
+    </label>
+  </div>
+
+  <div style="width: 100%">
+    <button (click)="convert()" class="convert-btn">Convert</button>
+  </div>
+  <div class="convert-label">
+    {{converterForm.get('amount')?.value}} {{converterForm.get('base')?.value}} =  {{convertedAmount?.toLocaleString(undefined, { maximumFractionDigits: 2 }) || 'XX.XX'}} {{converterForm.get('to')?.value}}
+  </div>
+  <div class="convert-value" [ngClass]="{'larger': !isHome}">
+    {{convertedAmount?.toLocaleString(undefined, { maximumFractionDigits: 2 }) || 'XX.XX'}} {{converterForm.get('to')?.value}}
+  </div>
+  <button style="width: 20%;" *ngIf="isHome" class="convert-btn"
+          [queryParams]="{'amount': converterForm.get('amount')?.value}"
+          [routerLink]="['/converter', converterForm.get('base')?.value, converterForm.get('to')?.value]">
+    More Details
+  </button>
+</div>
+
+<app-currencies-history *ngIf="!isHome && converterForm?.get('base')?.value && converterForm?.get('to')?.value"
+                        [base]="converterForm?.get('base')?.value"
+                        [to]="converterForm?.get('to')?.value">
+</app-currencies-history>

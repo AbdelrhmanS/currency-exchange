@@ -1,0 +1,28 @@
+
+
+.container {
+  display: flex;
+  margin: 82px auto 32px;
+  max-width: 960px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding: 2% 3% 3% 3%;
+}
+
+.control {
+  height: 4rem;
+  text-align: center;
+  border: 1px solid #988888;
+  padding: 0%;
+  width: 30%;
+  margin: 13px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: bold;
+}
